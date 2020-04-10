@@ -76,8 +76,10 @@ def compute_gpu_smpl(poses, shapes, get_joints=False):
     # Start running ops on the graph. Allow_soft_placement must be set to
     # True to build towers on GPU, as some of the ops don't have GPU
     # implementations.
-    sess_config = tf.ConfigProto(allow_soft_placement=True,
-                                 log_device_placement=False)
+    sess_config = tf.ConfigProto(
+            allow_growth=True,
+            allow_soft_placement=True,
+            log_device_placement=False)
     sess = tf.Session(config=sess_config)
     sess.run(init)
     if get_joints:

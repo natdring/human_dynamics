@@ -150,8 +150,9 @@ class VisRenderer(object):
             rend = rend.repeat(1, 3, 1, 1)
         else:
             rend = self.renderer.render(proj_verts, faces, texture)
-
-        rend = rend.data.cpu().numpy().transpose((0, 2, 3, 1))
+        
+        
+        rend = rend[0].data.cpu().numpy().transpose((0, 2, 3, 1))  # Changed for new pytorch version
         rend = np.clip(rend, 0, 1) * 255.0
 
         if num_batch == 1:
